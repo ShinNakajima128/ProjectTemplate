@@ -10,11 +10,11 @@ using UnityEngine.SceneManagement;
 public class SoundManager : SingletonMonoBehaviour<SoundManager>
 {
     [Header("タイトル画面のScene名")]
-    [SerializeField] const string m_titleScene = "Title";
+    [SerializeField] string m_titleScene = "Title";
     [Header("プレイ画面のScene名")]
-    [SerializeField] const string m_gameScene = "GameScene";
+    [SerializeField] string m_mainScene = "Main";
     [Header("リザルト画面のScene名")]
-    [SerializeField] const string m_resultScene = "Result";
+    [SerializeField] string m_resultScene = "Result";
     [Header("マスター音量")]
     [SerializeField, Range(0f, 1f)] float m_masterVolume = 1.0f;
     [Header("BGMの音量")]
@@ -39,6 +39,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     Dictionary<string, int> bgmIndex = new Dictionary<string, int>();
     Dictionary<string, int> seIndex = new Dictionary<string, int>();
     Dictionary<string, int> voiceIndex = new Dictionary<string, int>();
+    
 
     void Awake()
     {
@@ -68,6 +69,11 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
 
     private void Start()
     {
+        if (m_debug)
+        {
+            PlayBgmByName("");
+        }
+
         if (Instance && !m_debug)
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -76,7 +82,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
             {
                 PlayBgmByName("Title");
             }
-            else if (SceneManager.GetActiveScene().name == m_gameScene)
+            else if (SceneManager.GetActiveScene().name == m_mainScene)
             {
                 PlayBgmByName("");
             }
@@ -96,13 +102,13 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     {
         switch (SceneManager.GetActiveScene().name)
         {
-            case m_titleScene:
+            case "Title":
                 PlayBgmByName("Title");
                 break;
-            case m_gameScene:
+            case "Main":
                 PlayBgmByName("");
                 break;
-            case m_resultScene:
+            case "Result":
                 PlayBgmByName("");
                 break;
         }
