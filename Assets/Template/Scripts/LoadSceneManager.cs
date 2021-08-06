@@ -12,7 +12,7 @@ public class LoadSceneManager : SingletonMonoBehaviour<LoadSceneManager>
     [Header("タイトルのScene")]
     [SerializeField] const string m_titleScene = "Title";
     [Header("プレイするScene")]
-    [SerializeField] const string m_gameScene = "GameScene";
+    [SerializeField] const string m_mainScene = "Main";
     [Header("リザルトのScene")]
     [SerializeField] const string m_resultScene = "Result";
     [Header("ロード時に要する時間")]
@@ -62,9 +62,9 @@ public class LoadSceneManager : SingletonMonoBehaviour<LoadSceneManager>
         {
             Debug.Log("Title");
         }
-        else if (SceneManager.GetActiveScene().name == m_gameScene)
+        else if (SceneManager.GetActiveScene().name == m_mainScene)
         {
-            Debug.Log("GameScene");
+            Debug.Log("Main");
         }
         else if (SceneManager.GetActiveScene().name == m_resultScene)
         {
@@ -85,8 +85,8 @@ public class LoadSceneManager : SingletonMonoBehaviour<LoadSceneManager>
             case m_titleScene:
                 Debug.Log("Title");
                 break;
-            case m_gameScene:
-                Debug.Log("GameScene");
+            case m_mainScene:
+                Debug.Log("Main");
                 break;
             case m_resultScene:
                 Debug.Log("Result");
@@ -115,14 +115,28 @@ public class LoadSceneManager : SingletonMonoBehaviour<LoadSceneManager>
     }
 
    
-    /// <summary> タイトル画面へ遷移する </summary>
+    /// <summary> タイトルへ遷移する </summary>
     public void LoadTitleScene()
     {
         Time.timeScale = 1f;
         isFadeOut = true;
         StartCoroutine(LoadScene(m_titleScene, m_LoadTimer));
     }
-    
+
+    /// <summary> ゲームシーンへ遷移する </summary>
+    public void LoadMainScene()
+    {
+        isFadeOut = true;
+        StartCoroutine(LoadScene(m_mainScene, m_LoadTimer));
+    }
+
+    /// <summary> リザルトへ遷移する </summary>
+    public void LoadResultScene()
+    {
+        isFadeOut = true;
+        StartCoroutine(LoadScene(m_resultScene, m_LoadTimer));
+    }
+
     /// <summary> 任意のSceneへ遷移する </summary>
     public void AnyLoadScene(string loadScene)
     {
@@ -131,7 +145,7 @@ public class LoadSceneManager : SingletonMonoBehaviour<LoadSceneManager>
     }
 
     /// <summary>
-    /// Sceneを再読み込みする
+    /// Sceneのリスタート
     /// </summary>
     public void Restart()
     {
@@ -158,7 +172,7 @@ public class LoadSceneManager : SingletonMonoBehaviour<LoadSceneManager>
     }
 
     /// <summary>
-    /// Fade out
+    /// フェードアウトを開始する
     /// </summary>
     void StartFadeOut()
     {
@@ -172,7 +186,7 @@ public class LoadSceneManager : SingletonMonoBehaviour<LoadSceneManager>
     }
 
     /// <summary>
-    /// Fade in
+    /// フェードインを開始する
     /// </summary>
     void StartFadeIn()
     {
@@ -195,7 +209,7 @@ public class LoadSceneManager : SingletonMonoBehaviour<LoadSceneManager>
         isFadeOut = true;
     }
     /// <summary>
-    /// Set the alpha value
+    /// アルファ値をImageにセットする
     /// </summary>
     void SetAlfa()
     {
