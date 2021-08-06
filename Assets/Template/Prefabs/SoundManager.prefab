@@ -300,6 +300,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b49548202761374c95dbd4b3544cc51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_titleScene: Title
+  m_mainScene: Main
+  m_resultScene: Result
   m_masterVolume: 1
   m_bgmVolume: 0.1
   m_seVolume: 1
