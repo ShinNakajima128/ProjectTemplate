@@ -304,7 +304,7 @@ MonoBehaviour:
   m_mainScene: Main
   m_resultScene: Result
   m_masterVolume: 1
-  m_bgmVolume: 0.1
+  m_bgmVolume: 1
   m_seVolume: 1
   m_voiceVolume: 1
   m_bgms: []
