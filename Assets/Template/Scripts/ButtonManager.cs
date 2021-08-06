@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class ButtonManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void GameStart()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //LoadSceneManager.Instance.
     }
 }
