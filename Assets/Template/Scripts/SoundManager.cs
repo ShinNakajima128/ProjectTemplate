@@ -191,22 +191,25 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     /// </summary>
     public void VolumeChanger()
     {
-        if (m_bgmAudioSource && bgmVolumeChange)
+        if (m_bgmAudioSource && bgmVolumeChange || m_bgmAudioSource && masterVolumeChange)
         {
             m_bgmAudioSource.volume = m_bgmVolume * m_masterVolume;
-            bgmVolumeChange = false;
+            if (masterVolumeChange) masterVolumeChange = false;
+            if(bgmVolumeChange) bgmVolumeChange = false;
         }
 
-        if (m_seAudioSource && seVolumeChange)
+        if (m_seAudioSource && seVolumeChange || m_seAudioSource && masterVolumeChange)
         {
             m_seAudioSource.volume = m_seVolume * m_masterVolume;
-            seVolumeChange = false;
+            if (masterVolumeChange) masterVolumeChange = false;
+            if (seVolumeChange) seVolumeChange = false;
         }
 
-        if (m_voiceAudioSource && voiceVolumeChange)
+        if (m_voiceAudioSource && voiceVolumeChange || m_voiceAudioSource && masterVolumeChange)
         {
             m_voiceAudioSource.volume = m_voiceVolume * m_masterVolume;
-            voiceVolumeChange = false;
+            if (masterVolumeChange) masterVolumeChange = false;
+            if (voiceVolumeChange) voiceVolumeChange = false;
         }
     }
     
@@ -217,12 +220,13 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     public void MasterVolChange(float masterValue)
     {
         m_masterVolume = masterValue;
+        masterVolumeChange = true;
     }
 
     /// <summary>
     /// BGM音量を変更する
     /// </summary>
-    /// <param name="masterValue"> 音量 </param>
+    /// <param name="bgmValue"> 音量 </param>
     public void BgmVolChange(float bgmValue)
     {
         m_bgmVolume = bgmValue;
@@ -232,7 +236,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     /// <summary>
     /// SE音量を変更する
     /// </summary>
-    /// <param name="masterValue"> 音量 </param>
+    /// <param name="seValue"> 音量 </param>
     public void SeVolChange(float seValue)
     {
         m_seVolume = seValue;
@@ -242,7 +246,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     /// <summary>
     /// ボイス音量を変更する
     /// </summary>
-    /// <param name="masterValue"> 音量 </param>
+    /// <param name="voiceValue"> 音量 </param>
     public void VoiceVolChange(float voiceValue)
     {
         m_voiceVolume = voiceValue;
