@@ -118,18 +118,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31585ee6666e60f4797939a63b8b2c57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_titleScene: Title
-  m_easyScene: 
-  m_normalScene: 
-  m_hardScene: 
-  m_stageScenes: []
-  m_resultScene: 
   m_LoadTimer: 1
   fadeImage: {fileID: 7150421856246684231}
-  fadeSpeedValue: 1
+  fadeSpeedValue: 2
+  m_debugMode: 0
   isFadeOut: 0
   isFadeIn: 0
-  m_debugMode: 0
 --- !u!1 &7150421856575398382
 GameObject:
   m_ObjectHideFlags: 0

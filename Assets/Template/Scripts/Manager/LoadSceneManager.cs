@@ -71,12 +71,20 @@ public class LoadSceneManager : SingletonMonoBehaviour<LoadSceneManager>
             Debug.Log("Result");
         }
 
-        if (alfa > 0) isFadeIn = true;
+        if (alfa > 0)
+        {
+            if (isFadeOut) isFadeOut = false;
+            isFadeIn = true;
+        }
     }
 
     void OnSceneLoaded(Scene nextScene, LoadSceneMode mode)
     {
-        isFadeIn = true;
+        if (alfa > 0)
+        {
+            if (isFadeOut) isFadeOut = false;
+            isFadeIn = true;
+        }
 
         m_currentScene = SceneManager.GetActiveScene().name;@///Œ»İ‚ÌScene‚ğXV‚·‚é
 

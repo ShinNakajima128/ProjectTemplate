@@ -45,7 +45,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         }
         else if (SceneManager.GetActiveScene().name == "Result")
         {
-
         }
     }
 
