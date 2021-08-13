@@ -142,21 +142,39 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     }
 
     /// <summary>
-    /// 指定したBGMを再生する
+    /// 指定したSEを再生する
     /// </summary>
-    /// <param name="name"> BGMの名前 </param>
+    /// <param name="name"> SEの名前 </param>
     public void PlaySeByName(string name)
     {
         PlaySe(GetSeIndex(name));
     }
 
     /// <summary>
-    /// 指定したBGMを再生する
+    /// 指定したボイスを再生する
     /// </summary>
-    /// <param name="name"> BGMの名前 </param>
+    /// <param name="name"> ボイスの名前 </param>
     public void PlayVoiceByName(string name)
     {
         PlayVoice(GetVoiceIndex(name));
+    }
+
+    /// <summary>
+    /// 指定した場所でSEを再生する
+    /// </summary>
+    /// <param name="name"> SEの名前 </param>
+    public void PlaySeAtPointByName(string name, Vector3 point)
+    {
+        PlaySeAtPoint(GetSeIndex(name), point);
+    }
+
+    /// <summary>
+    /// 指定した場所でボイスを再生する
+    /// </summary>
+    /// <param name="name"> ボイスの名前 </param>
+    public void PlayVoiceAtPointByName(string name, Vector3 point)
+    {
+        PlayVoiceAtPoint(GetVoiceIndex(name), point);
     }
 
     /// <summary>
@@ -273,11 +291,25 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         m_seAudioSource.PlayOneShot(m_ses[index], m_seVolume * m_masterVolume);
     }
 
+    void PlaySeAtPoint(int index, Vector3 point)
+    {
+        index = Mathf.Clamp(index, 0, m_ses.Length);
+
+        AudioSource.PlayClipAtPoint(m_ses[index], point, m_seVolume * m_masterVolume);
+    }
+
     void PlayVoice(int index)
     {
         index = Mathf.Clamp(index, 0, m_voices.Length);
 
         m_voiceAudioSource.PlayOneShot(m_voices[index], m_voiceVolume * m_masterVolume);
+    }
+
+    void PlayVoiceAtPoint(int index, Vector3 point)
+    {
+        index = Mathf.Clamp(index, 0, m_voices.Length);
+
+        AudioSource.PlayClipAtPoint(m_voices[index], point, m_voiceVolume * m_masterVolume);
     }
 
     int GetBgmIndex(string name)
@@ -288,6 +320,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         }
         else
         {
+            Debug.Log("指定したBGMがありませんでした");
             return 0;
         }
     }
@@ -300,6 +333,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         }
         else
         {
+            Debug.Log("指定したSEがありませんでした");
             return 0;
         }
     }
@@ -312,6 +346,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         }
         else
         {
+            Debug.Log("指定したボイスがありませんでした");
             return 0;
         }
     }
