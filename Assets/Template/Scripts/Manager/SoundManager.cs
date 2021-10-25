@@ -11,33 +11,61 @@ using System.Linq;
 public class SoundManager : SingletonMonoBehaviour<SoundManager>
 {
     [Header("タイトル画面のScene名")]
-    [SerializeField] string m_titleScene = "Title";
+    [SerializeField] 
+    string m_titleScene = "Title";
+
     [Header("プレイ画面のScene名")]
-    [SerializeField] string m_mainScene = "Main";
+    [SerializeField] 
+    string m_mainScene = "Main";
+
     [Header("リザルト画面のScene名")]
-    [SerializeField] string m_resultScene = "Result";
+    [SerializeField] 
+    string m_resultScene = "Result";
+
     [Header("マスター音量")]
-    [SerializeField, Range(0f, 1f)] float m_masterVolume = 1.0f;
+    [SerializeField, Range(0f, 1f)]
+    float m_masterVolume = 1.0f;
+
     [Header("BGMの音量")]
-    [SerializeField, Range(0f, 1f)] float m_bgmVolume = 0.1f;
+    [SerializeField, Range(0f, 1f)] 
+    float m_bgmVolume = 0.1f;
+
     [Header("SEの音量")]
-    [SerializeField, Range(0f, 1f)] float m_seVolume = 1.0f;
+    [SerializeField, Range(0f, 1f)] 
+    float m_seVolume = 1.0f;
+
     [Header("VOICEの音量")]
-    [SerializeField, Range(0f, 1f)] float m_voiceVolume = 1.0f;
+    [SerializeField, Range(0f, 1f)] 
+    float m_voiceVolume = 1.0f;
+
     [Header("BGMリスト")]
-    [SerializeField] AudioClip[] m_bgms = null;
+    [SerializeField]
+    AudioClip[] m_bgms = null;
+
     [Header("SEリスト")]
-    [SerializeField] AudioClip[] m_ses = null;
+    [SerializeField] 
+    AudioClip[] m_ses = null;
+
     [Header("VOICEリスト")]
-    [SerializeField] AudioClip[] m_voices = null;
+    [SerializeField] 
+    AudioClip[] m_voices = null;
+
     [Header("BGMのAudioSource")]
-    [SerializeField] AudioSource m_bgmAudioSource = null;
+    [SerializeField]
+    AudioSource m_bgmAudioSource = null;
+
     [Header("SEのAudioSource")]
-    [SerializeField] AudioSource m_seAudioSource = null;
+    [SerializeField]
+    AudioSource m_seAudioSource = null;
+
     [Header("VOICEのAudioSource")]
-    [SerializeField] AudioSource m_voiceAudioSource = null;
+    [SerializeField] 
+    AudioSource m_voiceAudioSource = null;
+
     [Header("デバッグ用")]
-    [SerializeField] bool m_debug = false;
+    [SerializeField]
+    bool m_debug = false;
+
     /// <summary> マスター音量時のフラグ </summary>
     bool masterVolumeChange = false;
     /// <summary> BGM音量時のフラグ </summary>
@@ -94,7 +122,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
 
             if (SceneManager.GetActiveScene().name == m_titleScene)
             {
-                PlayBgmByName("Title");
+                PlayBgmByName("");
             }
             else if (SceneManager.GetActiveScene().name == m_mainScene)
             {
@@ -117,7 +145,7 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         switch (SceneManager.GetActiveScene().name)
         {
             case "Title":
-                PlayBgmByName("Title");
+                PlayBgmByName("");
                 break;
             case "Main":
                 PlayBgmByName("");
