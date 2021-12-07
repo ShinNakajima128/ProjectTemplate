@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 音関連を管理するクラス
@@ -73,6 +72,58 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
 
         DontDestroyOnLoad(gameObject);
 
+        Setup();
+    }
+
+    /// <summary>
+    /// BGMを再生する
+    /// </summary>
+    /// <param name="clip"> 再生するBGM </param>
+    public static void PlayBGM(AudioClip clip)
+    {
+        if (!Instance.m_bgmAudioSources[0].isPlaying && Instance.m_bgmAudioSources[1].isPlaying)
+        {
+            
+        }
+        else if (!Instance.m_bgmAudioSources[1].isPlaying && Instance.m_bgmAudioSources[0].isPlaying)
+        {
+
+        }
+        else
+        {
+            Instance.m_bgmAudioSources[0].clip = clip;
+            Instance.m_bgmAudioSources[0].loop = true;
+            Instance.m_bgmAudioSources[0].Play();
+        }
+    }
+
+    /// <summary>
+    /// SEを再生する
+    /// </summary>
+    /// <param name="clip"> 再生するSE </param>
+    public static void PlaySE(AudioClip clip)
+    {
+        foreach (var s in Instance.m_seAudioSources)
+        {
+            if (s.isPlaying)
+            {
+                continue;
+            }
+            else
+            {
+                s.clip = clip;
+                s.PlayOneShot(clip);
+                return;
+            }
+        }
+        Debug.LogError("現在のSEの再生数が最大のため再生できませんでした");
+    }
+
+    /// <summary>
+    /// ゲーム実行時にセットアップする
+    /// </summary>
+    void Setup()
+    {
         m_bgmAudioSources = new AudioSource[2];
 
         for (int i = 0; i < m_bgmAudioSources.Length; i++)
@@ -92,40 +143,6 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
         for (int i = 0; i < m_voiceAudioSources.Length; i++)
         {
             m_voiceAudioSources[i] = Instantiate(m_voiceAudioSource, m_voiceSourceParent);
-        }
-    }
-
-    void Start()
-    {
-       
-    }
-
-    /// <summary>
-    /// Sceneが遷移した時にBGMを変更する
-    /// </summary>
-    /// <param name="nextScene">遷移後のScene</param>
-    /// <param name="mode"></param>
-    void OnSceneLoaded(Scene nextScene, LoadSceneMode mode)
-    {
-       
-    }
-
-    public static void PlayBGM(AudioClip clip)
-    {
-        if (!Instance.m_bgmAudioSources[0].isPlaying)
-        {
-            Instance.m_bgmAudioSources[0].clip = clip;
-            Instance.m_bgmAudioSources[0].loop = true;
-            Instance.m_bgmAudioSources[0].Play();
-        }
-        else
-        {
-            Instance.m_bgmAudioSources[1].clip = clip;
-            Instance.m_bgmAudioSources[1].loop = true;
-            Instance.m_bgmAudioSources[1].Play();
-
-            Instance.m_bgmAudioSources[0].Stop();
-            Instance.m_bgmAudioSources[0].clip = default;
         }
     }
 }
