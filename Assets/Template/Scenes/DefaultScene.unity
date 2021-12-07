@@ -626,8 +626,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01cd24085b0bbaf43847c28e101eb7ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_playBGMButton: {fileID: 0}
-  m_playSEButton: {fileID: 0}
+  m_playBGMButton: {fileID: 1727692272}
+  m_playSEButton: {fileID: 2029283698}
+  m_bgm: {fileID: 8300000, guid: 3e97dfbf6be6a7d4daee5a19f4e38956, type: 3}
+  m_ses:
+  - {fileID: 8300000, guid: b014d088ce78e334fa43c37001e35737, type: 3}
 --- !u!1 &1677510173
 GameObject:
   m_ObjectHideFlags: 0
